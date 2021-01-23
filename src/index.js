@@ -18,6 +18,7 @@ app.use(
 );
 
 require('./routes/patient')(app);
+require('./routes/activity')(app);
 
 mongoConnection.on('error', console.log).on('disconnected', mongo);
 
