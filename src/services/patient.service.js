@@ -1,4 +1,3 @@
-const { getAll } = require('../controllers/patient.controller');
 const Patient = require('../models/patient');
 
 module.exports = {
