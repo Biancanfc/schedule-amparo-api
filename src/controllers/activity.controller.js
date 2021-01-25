@@ -16,7 +16,6 @@ module.exports = {
       );
     }
   },
-
   async create(req, res) {
     try {
       const { body } = req;

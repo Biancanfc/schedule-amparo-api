@@ -1,23 +1,26 @@
-const Activity = require('../models/activity');
+const Activity = require("../models/activity");
 
 module.exports = {
   async getAll(queryParams) {
-    let query = {};
-    const keys = Object.keys(queryParams);
+    const { limit, skip, cpf, dueDate, status } = queryParams;
 
-    if (keys.length > 0) {
-      query = {
-        $and: keys.map((key) => {
-          return {
-            [key]: queryParams[key],
-          };
-        }),
-      };
-    }
+    let query = {
+      $and: [],
+    };
 
-    const activities = await Activity.find(query);
+    if (cpf) query.$and.push({ "patient.cpf": cpf });
+    if (dueDate) query.$and.push({ dueDate });
+    if (status) query.$and.push({ status });
 
-    return activities;
+    const activities = await Activity.find(query.$and.length > 0 ? query : null)
+      .skip(parseInt(skip))
+      .limit(parseInt(limit));
+
+    const count = await Activity.find(
+      query.$and.length > 0 ? query : null
+    ).count();
+
+    return { limit: limit, skip: skip, total: count, data: activities };
   },
   async create(data) {
     const activity = await Activity.create(data);

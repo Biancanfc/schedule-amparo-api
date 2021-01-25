@@ -1,23 +1,8 @@
-const Patient = require('../models/patient');
+const Patient = require("../models/patient");
 
 module.exports = {
-  async getAll({ search }) {
-    let query = {};
-
-    if (search) {
-      query = {
-        $or: [
-          {
-            name: new RegExp(`${search}`, 'i'),
-          },
-          {
-            cpf: new RegExp(`${search}`, 'i'),
-          },
-        ],
-      };
-    }
-
-    const patients = await Patient.find(query);
+  async getAll() {
+    const patients = await Patient.find();
 
     return patients;
   },
