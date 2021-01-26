@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const config = require('../config');
+const mongoose = require("mongoose");
+const config = require("../config");
 
 const options = {
   useNewUrlParser: true,
@@ -8,17 +8,17 @@ const options = {
   useCreateIndex: true,
 };
 
-const uri = `${config.MONGODB_PROTOCOL}://${config.MONGODB_HOSTPORT}/${config.MONGODB_DATABASE}?authSource=admin`;
+const uri = `${config.MONGODB_PROTOCOL}://${config.MONGODB_USER}:${config.MONGODB_PASS}@${config.MONGODB_HOSTPORT}/${config.MONGODB_DATABASE}?authSource=admin`;
 
 module.exports = () => {
   mongoose
     .connect(uri, options)
     .then(() => {
-      console.log('mongo conectado!');
+      console.log("mongo conectado!");
     })
     .catch((err) => {
       console.log(err);
-      console.log('mongo não conectado');
+      console.log("mongo não conectado");
     });
 
   return mongoose.connection;
