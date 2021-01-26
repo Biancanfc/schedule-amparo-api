@@ -9,7 +9,7 @@ const options = {
 };
 
 const uri = `${config.MONGODB_PROTOCOL}://${config.MONGODB_USER}:${config.MONGODB_PASS}@${config.MONGODB_HOSTPORT}/${config.MONGODB_DATABASE}?authSource=admin`;
-
+console.log(uri);
 module.exports = () => {
   mongoose
     .connect(uri, options)
