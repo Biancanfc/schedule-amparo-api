@@ -8,7 +8,7 @@ const options = {
   useCreateIndex: true,
 };
 
-const uri = `${config.MONGODB_PROTOCOL}://${config.MONGODB_USER}:${config.MONGODB_PASS}@${config.MONGODB_HOSTPORT}/${config.MONGODB_DATABASE}?authSource=admin`;
+const uri = `${config.MONGODB_PROTOCOL}://${config.MONGODB_USER}:${config.MONGODB_PASS}@${config.MONGODB_HOSTPORT}/${config.MONGODB_DATABASE}?retryWrites=true&w=majority`;
 console.log(uri);
 module.exports = () => {
   mongoose
